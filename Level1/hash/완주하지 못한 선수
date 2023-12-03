@@ -1,0 +1,23 @@
+function solution(participant, completion) {
+     const participantHash = new Map();
+     const completionHash = new Map();
+
+    participant.map((ele) => {
+        if(participantHash.has(ele)) {
+          participantHash.set(ele, participantHash.get(ele) + 1); // 인원수
+        } else {
+            participantHash.set(ele, 1);
+        }
+    })
+
+    completion.map((ele) => {
+        if(participantHash.get(ele) === 1) {
+            participantHash.delete(ele) // 1명일 경우 제거
+        } else {
+            participantHash.set(ele, participantHash.get(ele) - 1) // 2명 이상일 경우 인원수 차감
+        }
+    });
+
+    return participantHash.keys().next().value; // map 객체에서 첫번째 인자 가져오기
+
+}
